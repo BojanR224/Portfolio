@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Palette: warm paper / soft ink / terracotta ───────────────────── */
+:root {
+  --c-paper: 247 243 236; /* warm paper */
+  --c-ink: 32 27 22; /* soft black ink */
+  --c-soft: 96 86 76; /* muted body text */
+  --c-faint: 158 148 136; /* placeholders, faint labels */
+  --c-line: 214 205 192; /* hairlines */
+  --c-accent: 180 67 42; /* terracotta */
+}
+
+.dark {
+  --c-paper: 20 17 14;
+  --c-ink: 237 231 221;
+  --c-soft: 176 166 152;
+  --c-faint: 122 112 100;
+  --c-line: 60 54 47;
+  --c-accent: 224 123 86;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    background: rgb(var(--c-accent) / 0.25);
+  }
+
+  /* One consistent, always-visible keyboard indicator everywhere */
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-accent));
+    outline-offset: 3px;
+  }
+}
+
+/* ── Entrance motion ────────────────────────────────────────────────── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.15s; }
+.rise-3 { animation-delay: 0.25s; }
+.rise-4 { animation-delay: 0.35s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise {
+    animation: none;
+  }
+}

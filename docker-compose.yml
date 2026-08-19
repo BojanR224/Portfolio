@@ -1,0 +1,52 @@
+services:
+  backend:
+    build: ./backend
+    container_name: portfolio-backend
+    environment:
+      DATABASE_URL: sqlite:////app/data/portfolio.db
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost}
+      TRUST_PROXY_HEADERS: "true"
+      CONTACT_RATE_LIMIT: ${CONTACT_RATE_LIMIT:-5}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_USE_TLS: ${SMTP_USE_TLS:-true}
+      SMTP_SENDER: ${SMTP_SENDER:-}
+      CONTACT_TO_EMAIL: ${CONTACT_TO_EMAIL:-}
+    volumes:
+      - portfolio-data:/app/data # SQLite lives here — survives rebuilds
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build: ./frontend
+    container_name: portfolio-frontend
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: portfolio-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:-localhost}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data # certificates
+      - caddy-config:/config
+    depends_on:
+      - backend
+      - frontend
+    restart: unless-stopped
+
+volumes:
+  portfolio-data:
+  caddy-data:
+  caddy-config:

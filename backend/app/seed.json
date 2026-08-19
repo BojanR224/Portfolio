@@ -1,0 +1,44 @@
+{
+  "projects": [
+    {
+      "title": "Ledgerline",
+      "description": "Double-entry bookkeeping for small studios and freelancers. Imports bank CSVs, suggests categorisations, and produces clean quarterly reports without a spreadsheet in sight.",
+      "techStack": ["TypeScript", "React", "FastAPI", "PostgreSQL"],
+      "repoUrl": "https://github.com/adareeves/ledgerline",
+      "liveUrl": "https://ledgerline.example.com",
+      "featured": true
+    },
+    {
+      "title": "Fieldnote",
+      "description": "An offline-first field journal for naturalists. Records sightings with geotags and weather context, syncs opportunistically, and never loses an entry when the signal drops.",
+      "techStack": ["React", "IndexedDB", "Service Workers", "Vite"],
+      "repoUrl": "https://github.com/adareeves/fieldnote",
+      "liveUrl": null,
+      "featured": true
+    },
+    {
+      "title": "Riverrun",
+      "description": "A tiny durable workflow engine on top of SQLite. Retries with backoff, a readable event log, and a single-file deployment story for teams that don't want Kafka.",
+      "techStack": ["Python", "SQLite", "asyncio"],
+      "repoUrl": "https://github.com/adareeves/riverrun",
+      "liveUrl": null,
+      "featured": true
+    },
+    {
+      "title": "Hearth",
+      "description": "Self-hosted recipe scaling and meal planning. Paste any recipe URL and get clean, structured ingredients that re-scale without arithmetic crimes.",
+      "techStack": ["TypeScript", "React", "FastAPI"],
+      "repoUrl": "https://github.com/adareeves/hearth",
+      "liveUrl": "https://hearth.example.com",
+      "featured": false
+    },
+    {
+      "title": "Cadence",
+      "description": "A terminal dashboard for reading habits — sessions, pages, and streaks rendered in braille sparklines straight from a SQLite file.",
+      "techStack": ["Python", "Rich", "SQLite"],
+      "repoUrl": "https://github.com/adareeves/cadence",
+      "liveUrl": null,
+      "featured": false
+    }
+  ]
+}

@@ -9,7 +9,7 @@ interface State {
 }
 
 /** Catches render errors anywhere below it — no route ever blanks out. */
-export class ErrorBoundary extends Component<Props, State> {
+export default class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false };
 
   static getDerivedStateFromError(): State {
